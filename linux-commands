@@ -1,0 +1,162 @@
+Linux files consist on 3 different categories
+1.	General file: it could be a simple file e.g txt or image
+2.	Directory file: it is folder structure e.g subdirectories
+3.	Device files: tree structure e.f /dev/sda
+Tree of directories start from root (/) and every file have special role in organizing system file, user data and configuration
+1.	/bin - Contains essential binary or executable programs required for basic system operation.
+2.	/etc - Stores system-wide configuration files used to control system behavior.
+3.	/home - Contains user home directories and serves as the default working directory for users.
+4.	/opt - Holds optional or third-party software packages installed separately from the system.
+5.	/tmp - Provides temporary storage space for files, which is typically cleared on system reboot.
+6.	/usr - Contains user-related programs, utilities, and shared resources.
+7.	/var - Stores variable data such as log files that change frequently during system operation.
+8.	
+
+Week 1 – Linux Basics: Filesystem & Navigation (Done)
+----------------------------------------------
+📂 Commands: pwd, ls, cd, mkdir, touch, tree
+📝 Tasks:
+- Navigate directories
+- Create folders & files
+- Explore hidden files (ls -a)
+Mini-project: Build a project folder structure and navigate it
+
+Week 2 – File Operations & Permissions (Done)
+--------------------------------------
+📂 Commands: cp, mv, rm, chmod, chown, chgrp
+📝 Tasks:
+- Copy, move, rename, delete files
+- Change file permissions and ownership
+Mini-project: Set up a folder with restricted permissions
+So basically we need 2 commands to provide permission chmod and chown. chown is use for change the owner and chmod use for change of group. So means every file on directory we hav 3 permission groups e.g Owner, Group and other.
+d rwx rwx r-w
+d (directory in case of folder)  rwx (Owner) rwx (Group)  r-x (All User)
+1.	For Change owner: chown (new owner name) filename --- this is use for change file owner only
+To change file owner and group: sudo chown saqib:saqib filename
+2.	Chmod (change mode) r= 4, w=2 and x=1
+Chmod 664 filename
+While common permission as below
+644- file basline
+755 – directory basline
+400 – key pair 
+
+
+Week 3 – Processes & Jobs
+-------------------------
+📂 Commands: ps, top, htop, kill, pkill, &, jobs, fg, bg
+📝 Tasks:
+- List running processes
+- Kill/stop processes
+- Run processes in background and manage jobs
+Mini-project: Monitor and restart a process like nginx
+
+Week 4 – Services & Systemctl
+-----------------------------
+📂 Commands: systemctl start/stop/restart/status, service
+📝 Tasks:
+- Start/stop/restart services
+- Check service status
+Mini-project: Ensure nginx or apache is running, restart if stopped
+
+Week 5 – Networking Basics
+--------------------------
+📂 Commands: ping, curl, ifconfig, ip addr, netstat, ss
+📝 Tasks:
+- Ping a server
+- Check network interfaces and IP
+- List open ports
+Mini-project: Script to ping a website and log online/offline status
+
+Week 6 – Log Files & Monitoring
+-------------------------------
+📂 Commands: journalctl, tail -f, cat, less, head
+📝 Tasks:
+- View system logs
+- Monitor logs in real-time
+Mini-project: Monitor nginx logs while sending HTTP requests
+
+Week 7 – Bash Scripting Basics
+------------------------------
+📂 Concepts: Variables, echo, command substitution, if-else, loops
+📝 Tasks:
+- Write simple scripts to automate commands
+- Use variables and loops
+Mini-project: Script to monitor disk usage or website uptime
+
+Week 8 – Bash Scripting Advanced + Cron Jobs
+--------------------------------------------
+📂 Concepts: Functions, arguments ($1, $2), case statements, error handling, cron
+📝 Tasks:
+- Write reusable functions in scripts
+- Schedule scripts with cron
+Mini-project: Daily backup script for project folders
+
+Week 9 – Package Management & Linux Tools
+-----------------------------------------
+📂 Commands: apt update/install/remove, grep, awk, sed, find, tar, zip/unzip
+📝 Tasks:
+- Install and manage software
+- Process and filter text files
+- Compress and extract files
+Mini-project: Script to search error logs and compress them
+
+Week 10 – Users, Permissions & Security
+---------------------------------------
+📂 Commands: adduser, deluser, usermod, groups, su, chmod, chown, getfacl, setfacl
+📝 Tasks:
+- Manage users and groups
+- Set file permissions and ACLs
+Mini-project: Create users, assign folder permissions, and log actions
+
+
+Linux Networking Commands Diagram (Week 2)
+[Your WSL Ubuntu System]
+          |
+          |--- ping ---▶ [Remote Server / Website]
+          |        (Check if online, measure latency)
+          |
+          |--- curl -I ---▶ [Remote Server / Website]
+          |        (Check HTTP headers, server response)
+          |
+          |--- netstat ---▶ [Local Ports & Connections]
+          |        (Which processes are listening / connected)
+          |
+          |--- ifconfig ---▶ [Local Network Interfaces]
+          |        (Check IP addresses, status, network config)
+          |
+          |--- Bash Script (uptime.sh) ---▶ Combines ping + logging
+          |        (Automates monitoring website and logs results)
+________________________________________
+Step-by-Step Explanation
+1.	Ping
+o	Your system → sends “echo requests” → remote server → responds → you see latency
+o	Used to check if a server is reachable
+2.	Curl -I
+o	Your system → sends HTTP request headers → remote server responds → you see status codes
+o	Used to check if a website is running and returning 200 OK
+3.	Netstat
+o	Your system → lists all open network ports and their processes
+o	Useful to see what is running locally (like nginx, Docker containers)
+4.	Ifconfig
+o	Your system → shows network interfaces (eth0, wlan0, etc.)
+o	Displays IP address, MAC address, and interface status
+5.	Bash Script (uptime.sh)
+o	Combines ping + logic to check server availability
+o	Logs the result into a file for later reference
+o	Can be automated to run every minute/hour
+________________________________________
+Example Workflow for Monitoring a Website
+1.	Use ping to check if Google is online. ✅
+2.	If online, echo timestamp + status → append to status.log
+3.	If not online, echo timestamp + “Down” → append to status.log
+4.	Optionally check netstat to see if any services (like nginx) are running
+5.	Use ifconfig if you need your local IP for testing connections
+________________________________________
+💡 Tip: Think of it as a flow from your machine to the network:
+•	Ping → “Is the server alive?”
+•	Curl → “Is the website responding properly?”
+•	Netstat → “What’s happening on my machine?”
+•	Ifconfig → “What’s my network configuration?”
+•	Bash script → “Automate all of this and log results”
+
+
