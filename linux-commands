@@ -51,3 +51,31 @@ student@linuxconfig:$ pwd
 student@linuxconfig:$
 
 does not change the current working directory:set number.
+
+Topic: Service & Systemctl 
+1. Service (Legacy command): Old-school command to start, stop, restart, or check services
+
+Works on both old init systems and modern systemd systems
+
+Syntax example:sudo service nginx start
+sudo service nginx stop
+sudo service nginx restart
+sudo service nginx status
+ 
+2. systemctl (modern, systemd-specific): Used with systemd (the modern service manager)
+
+Can manage services, sockets, timers, targets, and more
+
+Provides more control, detailed status, and logs
+
+Examples:sudo systemctl start nginx
+sudo systemctl stop nginx
+sudo systemctl restart nginx
+systemctl status nginx
+sudo systemctl enable nginx    # start at boot
+sudo systemctl disable nginx   # disable at boot
+
+Note:Syntax is different between service and systemctl as below:
+for service: sudo service <service_name> <action>
+for systemctl: sudo systemctl <action> <service_name>
+ 
