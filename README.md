@@ -46,4 +46,3 @@ Project: Store all Bash scripts and projects in GitHub
 
 Running Bash commands from Python using subprocess
 Mini-project: Automate log backup using Python
-
